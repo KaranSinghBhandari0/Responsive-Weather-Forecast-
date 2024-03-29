@@ -1,6 +1,24 @@
 let input = document.querySelector("input");
 let button = document.querySelector("button");
 let image = document.querySelector("img");
+let locationIcon = document.querySelector("#location-icon");
+
+function gotLocation(position) {
+    let url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&localityLanguage=en`;
+
+    fetch(url).then(response => response.json()).then(data => {getWeatherInfo(data.city)});
+}
+
+function failedToGet() {
+    document.querySelector(".container").innerHTML = `<h2>Please allow Loaction</h2> <img src="404.png">`;
+    setTimeout(() => {
+        location.reload();
+    }, 1500);
+}
+
+locationIcon.addEventListener("click", async ()=> {
+    const result = navigator.geolocation.getCurrentPosition(gotLocation,failedToGet);
+})
 
 let getWeatherInfo = async (city) => {
     try {
@@ -9,7 +27,7 @@ let getWeatherInfo = async (city) => {
 
         const data = await fetch(url).then(response => response.json());
 
-        document.querySelector("#cityName").innerText = input.value;
+        document.querySelector("#cityName").innerText = city;
         document.querySelector("#Weather-Type").innerText = data.weather[0].description;
         document.querySelector("#temp").innerHTML = Math.round(data.main.temp - 273) + `<sup>°</sup>` + "C";
         document.querySelector("#humidity").innerText = data.main.humidity + "%";

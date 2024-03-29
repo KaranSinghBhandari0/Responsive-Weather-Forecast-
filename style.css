@@ -39,6 +39,14 @@ body {
     font-size: 20px;
 }
 
+#location-icon {
+    height: 10%;
+    padding: 5px;
+    margin-left: 30px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
 #cityName {
     font-size: 25px;
     font-weight: 600;
