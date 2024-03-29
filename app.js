@@ -34,8 +34,10 @@ let getWeatherInfo = async (city) => {
 
         document.querySelector("#Details").style.display = 'block';
     } catch (error) {
-        document.querySelector("#Details").style.display = 'none';
-        alert("No city Found!!");
+        document.querySelector(".container").innerHTML = `<h2>No city Found !!!</h2> <img src="404.png">`;
+        setTimeout(() => {
+            location.reload();
+        }, 1500);
     }
 }
 
