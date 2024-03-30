@@ -5,7 +5,12 @@
 }
 
 body {
-    background-color: #9F70FD;
+    background-image: url("bcg.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    /* background-color: #9F70FD; */
 }
 
 .container {
